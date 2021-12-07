@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  api:
+    container_name: api
+    build:
+      context: ./
+      dockerfile: dockerfile.dev
+    depends_on:
+        - db
+    volumes:
+        - "./:/api"
+    env_file:
+        - ./.dev.env
+    ports:
+        - "8000:8000"
+    networks:
+        - api-net
+    command: npm start
+  db:
+    image: mysql
+    container_name: mysql
+    networks:
+      - api-net
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456789
+      MYSQL_USER: oasis
+      MYSQL_DATABASE: db-portafolio
+      MYSQL_PASSWORD: 123456789
+    
+networks:
+  api-net:
+    driver: bridge
