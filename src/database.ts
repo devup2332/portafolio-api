@@ -8,12 +8,15 @@ const pool = mysql.createPool({
     database: environments.DB.DB_DATABASE,
 });
 
-pool.getConnection((err) => {
-    if (err) {
-        throw new Error("Database connection failed");
-    }
+const promisePool = pool.promise();
 
-    console.log("Database is connected");
-});
+const connection = async () => {
+    pool.getConnection((err) => {
+        if (err) console.log("Database fail");
+        console.log("Database is ready");
+    });
+};
 
-export default pool
+connection();
+
+export default promisePool;
