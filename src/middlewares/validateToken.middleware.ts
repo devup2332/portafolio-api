@@ -1,18 +1,23 @@
-import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import { ExtractJwt, Strategy } from "passport-jwt";
+import { environments } from "../environments";
+import pool from "../database";
 
-export const ValidateToken = (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const token = req.headers.authorization?.split(" ")[1] as string;
-        if (!token) throw new Error("Token is undefined");
-        const decoded = jwt.decode(token);
-        if (!decoded) throw new Error("Invalid Token");
-        next();
-    } catch (err: any) {
-        console.log({ ...err });
-        return res.status(401).json({
-            mesage: err.message,
-            status: 401,
-        });
+const strategy = new Strategy(
+    {
+        secretOrKey: environments.JWT.SECRET_KEY,
+        jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    },
+    async (payload, done) => {
+        const userId = payload.id;
+
+        const response = await pool.query("SELECT * FROM users WHERE id = ?", [userId]);
+        if (!response[0]) {
+            return done(true, false);
+        }
+
+        return done(null, response[0]);
     }
-};
+);
+
+export default strategy
+
