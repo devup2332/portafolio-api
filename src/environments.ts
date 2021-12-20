@@ -9,4 +9,5 @@ export const environments = {
         DB_PASSWORD: process.env.DB_PASSWORD,
         DB_DATABASE: process.env.DB_DATABASE,
     },
+    PORT: process.env.PORT || 8000
 };
