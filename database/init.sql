@@ -6,6 +6,8 @@ CREATE TABLE users(
     password VARCHAR(60) NOT NULL,
     fullname VARCHAR(100) NOT NULL,
     created_at timestamp NOT NULL DEFAULT current_timestamp,
+    description VARCHAR(500) NOT NULL,
+    phone INT(11) NOT NULL,
     role VARCHAR(20) NOT NULL DEFAULT 'user'
 );
 
@@ -15,4 +17,36 @@ ALTER TABLE users
 ALTER TABLE users
     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
 
+CREATE TABLE links(
+    id INT(11) NOT NULL,
+    linkedin VARCHAR(300) NOT NULL,
+    github VARCHAR(300) NOT NULL,
+    user_id INT(11),
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+ALTER TABLE links 
+    ADD PRIMARY KEY (id);
+    
+ALTER TABLE links 
+    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
+
+CREATE TABLE projects(
+    id INT(11) NOT NULL,
+    image VARCHAR(300) NOT NULL,
+    description VARCHAR(300) NOT NULL,
+    user_id INT(11),
+    created_at timestamp NOT NULL DEFAULT current_timestamp,
+    CONSTRAINT fk_userproject FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+ALTER TABLE projects 
+    ADD PRIMARY KEY (id);
+    
+ALTER TABLE projects 
+    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
+
+DESCRIBE projects;
 DESCRIBE users;
+DESCRIBE links;
