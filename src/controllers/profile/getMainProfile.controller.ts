@@ -15,10 +15,10 @@ export const GetMainProfile = async (req: Request, res: Response) => {
             message: "Main profile got successfully",
             profile: newUser,
         });
-    } catch (err) {
+    } catch (err:any) {
         return res.status(400).json({
             message: "Server is not responding",
-            status: 400,
+            status: 401,
         });
     }
 };
