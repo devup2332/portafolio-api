@@ -50,3 +50,20 @@ ALTER TABLE projects
 DESCRIBE projects;
 DESCRIBE users;
 DESCRIBE links;
+
+INSERT INTO users (
+    description,
+    username,
+    password,
+    fullname,
+    phone,
+    role
+)
+VALUES (
+    'Esta es mi descripcion inicial',
+    'diegorrc147',
+    '123456789',
+    'Diego Rojas',
+    '988937949',
+    'superadmin'
+)
