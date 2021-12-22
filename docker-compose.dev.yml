@@ -9,25 +9,23 @@ services:
     depends_on:
         - db
     volumes:
-        - "./:/api"
-        - "/api/node_modules"
-    env_file:
-        - ./.dev.env
+        - "./:/usr/src/api"
+        - "/user/src/api/node_modules"
     ports:
-      - "4000:4000"
+      - "${PORT}:${PORT}"
     networks:
         - api-net
-    command: npm start
+    command: npm run dev 
   db:
     image: mysql
     container_name: mysql
     networks:
       - api-net
     environment:
-      MYSQL_ROOT_PASSWORD: 123456789
-      MYSQL_USER: oasis
-      MYSQL_DATABASE: db-portafolio
-      MYSQL_PASSWORD: 123456789
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} 
+      MYSQL_USER: ${DB_USER} 
+      MYSQL_DATABASE: ${DB_DATABASE} 
+      MYSQL_PASSWORD: ${DB_PASSWORD} 
     
 networks:
   api-net:

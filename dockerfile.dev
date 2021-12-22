@@ -1,8 +1,8 @@
 FROM node:16.13.1
 
-WORKDIR /api
+WORKDIR /usr/src/api/
 
-COPY package*.json /api/
+COPY package*.json /usr/src/api/
 
 RUN npm install
 
