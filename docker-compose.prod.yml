@@ -1,0 +1,47 @@
+
+version: "3.9"
+
+services:
+  api:
+    container_name: api
+    build:
+      context: ./
+      dockerfile: dockerfile.prod
+    depends_on:
+        - db
+    volumes:
+        - "./:/api"
+        - "/api/node_modules"
+    env_file:
+        - ./.dev.env
+    ports:
+      - "4000:4000"
+    networks:
+        - api-net
+    command: npm start 
+  db:
+    image: mysql
+    container_name: mysql
+    restart: always
+    networks:
+      - api-net
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} 
+      MYSQL_USER: ${DB_USER} 
+      MYSQL_DATABASE: ${DB_DATABASE} 
+      MYSQL_PASSWORD: ${DB_PASSWORD} 
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+      - api
+    restart: always
+    networks:
+      - api-net
+    
+networks:
+  api-net:
+    driver: bridge
