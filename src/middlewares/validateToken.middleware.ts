@@ -10,14 +10,13 @@ const strategy = new Strategy(
     async (payload, done) => {
         const userId = payload.id;
 
-        const response = await pool.query("SELECT * FROM users WHERE id = ?", [userId]);
+        const response = (await pool.query("SELECT * FROM users WHERE id = ?", [userId])) as any;
         if (!response[0]) {
             return done(true, false);
         }
 
-        return done(null, response[0]);
+        return done(null, response[0][0]);
     }
 );
 
-export default strategy
-
+export default strategy;
