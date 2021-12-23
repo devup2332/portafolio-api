@@ -6,6 +6,6 @@ import { GetUsersController } from "../controllers/users/getUsers.controller";
 const router = Router();
 
 router.get("/", passport.authenticate("jwt", { session: false }), GetUsersController);
-router.post("/", passport.authenticate("jwt", { session: false }), CreaterUserController);
+router.post("/", CreaterUserController);
 
 export default router;

@@ -12,19 +12,19 @@ export const LoginUserController = async (req: Request, res: Response) => {
 
     if (!user)
         return res.status(401).json({
-            mesage: "User dosent exist",
+            message: "User dosent exist",
             status: 401,
         });
     const match = await comparePassword(password, user.password);
     if (!match)
         return res.status(401).json({
-            mesage: "Password is incorrect",
+            message: "Password is incorrect",
             status: 401,
         });
     const token = generateToken(user);
 
     return res.status(200).json({
-        mesage: "Loggin Successfully",
+        message: "Loggin Successfully",
         status: 200,
         token,
     });

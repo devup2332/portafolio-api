@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import pool from "../../database";
-import {hashPassword} from "../../lib/hashPassword";
+import { hashPassword } from "../../lib/hashPassword";
 
 const roles = ["admin", "user", "superadmin"];
 export const CreaterUserController = async (req: Request, res: Response) => {
     try {
+        console.log(req.body);
         const { username, password, fullname, role, description, phone } = req.body;
         const [rolUser] = roles.filter((rol) => {
             return rol === role;
@@ -14,8 +15,8 @@ export const CreaterUserController = async (req: Request, res: Response) => {
                 message: "Invalid Role",
                 status: 400,
             });
-        
-        const hash = await hashPassword(password)
+
+        const hash = await hashPassword(password);
         const newUser = {
             username,
             password: hash,

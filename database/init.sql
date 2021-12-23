@@ -62,8 +62,18 @@ INSERT INTO users (
 VALUES (
     'Esta es mi descripcion inicial',
     'diegorrc147',
-    '123456789',
+    '$2b$10$X5xESP7CKck/tDxDhjhtdu8SeQ/./B7DCVMqtXtNbjWSBXMbcdeGG',
     'Diego Rojas',
     '988937949',
     'superadmin'
+)
+
+INSERT INTO links (
+    linkedin,
+    github
+)
+
+VALUES (
+    'https://www.linkedin.com/in/diego-raul-rojas-ab289b208?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BFCOotEMFQg%2B4ZedNKjAbaA%3D%3D',
+    'https://github.com/devup2332'
 )
