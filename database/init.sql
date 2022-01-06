@@ -1,4 +1,4 @@
-USE db-portafolio
+USE dbportafolio
 
 CREATE TABLE users(
     id INT(11) NOT NULL,
@@ -59,21 +59,24 @@ INSERT INTO users (
     phone,
     role
 )
+
 VALUES (
     'Esta es mi descripcion inicial',
     'diegorrc147',
-    '$2b$10$X5xESP7CKck/tDxDhjhtdu8SeQ/./B7DCVMqtXtNbjWSBXMbcdeGG',
+    '$2b$10$X5xESP7CKck/tDxDhjhtdu8SeQ/./B7DCVMqtXtNbjWSBXMbcdeGG', /*Password is 123123123 */
     'Diego Rojas',
     '988937949',
     'superadmin'
-)
+);
 
 INSERT INTO links (
     linkedin,
-    github
+    github,
+    user_id
 )
 
 VALUES (
     'https://www.linkedin.com/in/diego-raul-rojas-ab289b208?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BFCOotEMFQg%2B4ZedNKjAbaA%3D%3D',
-    'https://github.com/devup2332'
-)
+    'https://github.com/devup2332',
+    1
+);
