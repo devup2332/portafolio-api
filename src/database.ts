@@ -12,7 +12,7 @@ const promisePool = pool.promise();
 
 const connection = async () => {
     pool.getConnection((err) => {
-        if (err) return console.log("Database fail",err);
+        if (err) return console.log("Database fail", err);
         console.log("Database is ready");
     });
 };

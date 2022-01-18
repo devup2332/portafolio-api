@@ -10,7 +10,7 @@ services:
         - db
     volumes:
         - "./:/usr/src/api"
-        - "/user/src/api/node_modules"
+        - "/usr/src/api/node_modules"
     ports:
       - "${PORT}:${PORT}"
     networks:
