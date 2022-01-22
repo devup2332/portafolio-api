@@ -11,21 +11,30 @@ export const LoginUserController = async (req: Request, res: Response) => {
     const user = response[0][0] as User;
 
     if (!user)
-        return res.status(401).json({
+        return res.status(200).json({
             message: "User dosent exist",
             status: 401,
         });
     const match = await comparePassword(password, user.password);
     if (!match)
-        return res.status(401).json({
+        return res.status(200).json({
             message: "Password is incorrect",
             status: 401,
         });
     const token = generateToken(user);
 
+    if (user.role === "superadmin") {
+        return res.status(200).json({
+            message: "Login superadmin successfully",
+            status: 200,
+            token,
+            role: user.role,
+        });
+    }
     return res.status(200).json({
         message: "Loggin Successfully",
         status: 200,
         token,
+        role: user.role,
     });
 };

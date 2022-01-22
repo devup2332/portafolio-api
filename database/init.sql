@@ -2,12 +2,12 @@ USE dbportafolio
 
 CREATE TABLE users(
     id INT(11) NOT NULL,
-    username VARCHAR(16) NOT NULL,
-    password VARCHAR(60) NOT NULL,
-    fullname VARCHAR(100) NOT NULL,
+    username VARCHAR(300) NOT NULL,
+    password VARCHAR(300) NOT NULL,
+    fullname VARCHAR(300) NOT NULL,
     created_at timestamp NOT NULL DEFAULT current_timestamp,
-    description VARCHAR(500) NOT NULL,
-    phone INT(11) NOT NULL,
+    description VARCHAR(1000) NOT NULL,
+    phone INT(60) NOT NULL,
     role VARCHAR(20) NOT NULL DEFAULT 'user'
 );
 

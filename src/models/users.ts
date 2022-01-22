@@ -4,7 +4,8 @@ export interface User {
     username: string;
     phone: number | string;
     fullname: string;
+    github: string;
+    linkedin: string;
     created_at: Date;
-    links: [];
     role: "admin" | "user" | "superadmin";
 }

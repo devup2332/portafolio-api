@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
+import { Response, Request } from "express";
 import pool from "../../database";
 import { hashPassword } from "../../lib/hashPassword";
 
-const roles = ["user", "superadmin"];
-export const CreaterUserController = async (req: Request, res: Response) => {
+const roles = ["admin"];
+export const CreateAdminUsersController = async (req: Request, res: Response) => {
     try {
-        const { username, password, fullname, role, description, phone } = req.body;
+        const { role, username, password, fullname, description, phone } = req.body;
         if (!username || !password || !fullname || !role || !description || !phone) {
             return res.status(400).json({
                 message: "Please send complete data",
@@ -19,19 +19,13 @@ export const CreaterUserController = async (req: Request, res: Response) => {
                 message: "Username already exist",
             });
         }
-        const [rolUser] = roles.filter((rol) => {
+        const [rol] = roles.filter((rol) => {
             return rol === role;
         });
-        if (!rolUser)
-            return res.status(400).json({
-                message: "Invalid Role",
-                status: 400,
-            });
-        const superadmin = (await pool.query("SELECT * FROM users WHERE role='superadmin'")) as any;
-        if (role === "superadmin" && superadmin[0][0]) {
+        if (!rol) {
             return res.status(200).json({
                 status: 200,
-                message: "There is a superadmin user already",
+                message: "Invalid role",
             });
         }
         const hash = await hashPassword(password);
@@ -43,15 +37,17 @@ export const CreaterUserController = async (req: Request, res: Response) => {
             description,
             phone,
         };
-        await pool.query("INSERT INTO users set ?", [newUser]);
+
+        const created = (await pool.query("INSERT INTO users set ?", [newUser])) as any;
+
         return res.status(200).json({
             status: 200,
-            message: "New User created Successfully",
+            message: `New ${role} created successfully`,
+            user: created[0][0],
         });
     } catch (err) {
-        console.log(err);
         return res.status(500).json({
-            message: "Bad Request",
+            message: "Server internal error",
             status: 500,
         });
     }
