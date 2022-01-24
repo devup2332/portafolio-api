@@ -1,11 +1,14 @@
+import { Links } from "./links";
+
 export interface User {
-    id: string;
+    id?: string;
     password: string;
     username: string;
+    email?: string;
     phone: number | string;
     fullname: string;
-    github: string;
-    linkedin: string;
-    created_at: Date;
+    about_me: string;
+    social_links?: Links;
+    created_at?: Date;
     role: "admin" | "user" | "superadmin";
 }

@@ -1,15 +1,15 @@
 import { Router } from "express";
 import passport from "passport";
-import {CreateAdminUsersController} from "../controllers/users/createAdminUsers.controller";
+import { CreateAdminController } from "../controllers/users/createAdmin.controller";
 import { CreaterUserController } from "../controllers/users/createUser.controller";
-import { GetSuperAdminProfile } from "../controllers/users/getSuperAdminProfile";
+import { GetSuperadminController } from "../controllers/users/getSuperAdminProfile";
 import { GetUsersController } from "../controllers/users/getUsers.controller";
 
 const router = Router();
 
 router.get("/", passport.authenticate("jwt", { session: false }), GetUsersController);
-router.get("/superadmin", passport.authenticate("jwt", { session: false }), GetSuperAdminProfile);
+router.get("/superadmin", passport.authenticate("jwt", { session: false }), GetSuperadminController);
 router.post("/", CreaterUserController);
-router.post("/admin", CreateAdminUsersController);
+router.post("/admin", passport.authenticate("jwt", { session: false }), CreateAdminController);
 
 export default router;
