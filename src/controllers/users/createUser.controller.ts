@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { create } from "ts-node";
 import pool from "../../database";
 import { hashPassword } from "../../lib/hashPassword";
 import { User } from "../../models/users";
@@ -46,7 +47,18 @@ export const CreaterUserController = async (req: Request, res: Response) => {
                 about_me,
                 phone,
             };
-            await pool.query("INSERT INTO users set ?", [newUser]);
+            const created = (await pool.query("INSERT INTO users set ?", [newUser])) as any;
+
+            const links = {
+                github: "",
+                linkedin: "",
+                youtube: "",
+                website: "",
+                facebook: "",
+                instagram: "",
+                user_id: created[0].insertId,
+            };
+            await pool.query("INSERT INTO social_links set ?", [links]);
             return res.status(200).json({
                 status: 200,
                 message: "New Superadmin created Successfully",
