@@ -9,7 +9,6 @@ const strategy = new Strategy(
     },
     async (payload, done) => {
         const userId = payload.id;
-
         const response = (await pool.query("SELECT * FROM users WHERE id = ?", [userId])) as any;
         if (!response[0]) {
             return done(true, false);
