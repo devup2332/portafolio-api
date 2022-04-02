@@ -20,6 +20,7 @@ export const environments = {
   },
   NODEMAILER: {
     NODEMAILER_EMAIL: process.env.NODEMAILER_EMAIL,
-    NODEMAILER_PASSWORD: process.env.NODEMAILER_PASSWORD,
+    NODEMAILER_PASSWORD: process.env.NODEMAILER_PASSWORD,
+
   },
 };
