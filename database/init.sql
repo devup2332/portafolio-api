@@ -40,7 +40,6 @@ ALTER TABLE social_links
 
 CREATE TABLE projects(
     id INT(11) NOT NULL,
-    cover VARCHAR(300) NOT NULL,
     description VARCHAR(300) NOT NULL,
     user_id INT(11) NOT NULL,
     created_at timestamp NOT NULL DEFAULT current_timestamp,
@@ -52,3 +51,20 @@ ALTER TABLE projects
     
 ALTER TABLE projects 
     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
+
+CREATE TABLE images(
+  id INT(11) NOT NULL,
+  secure_url VARCHAR(300) NOT NULL,
+  public_id VARCHAR(300) NOT NULL,
+  type_image VARCHAR(20) NOT NULL DEFAULT 'cover',
+  project_id INT(11),
+  created_at timestamp NOT NULL DEFAULT current_timestamp,
+  CONSTRAINT fk_imageproject FOREIGN KEY (project_id) REFERENCES projects(id),
+  CONSTRAINT chk_typeimage CHECK (type_image in ('cover','image'))
+);
+
+ALTER TABLE images 
+  ADD PRIMARY KEY (id);
+    
+ALTER TABLE images 
+  MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;

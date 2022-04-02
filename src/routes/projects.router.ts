@@ -9,8 +9,6 @@ const router = Router();
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
-  multer.single("cover"),
-  multer.array("image_:ind"),
   CreateProject
 );
 
