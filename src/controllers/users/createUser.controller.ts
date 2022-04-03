@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { create } from "ts-node";
 import pool from "../../database";
 import { hashPassword } from "../../lib/hashPassword";
 import { User } from "../../models/users";

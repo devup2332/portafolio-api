@@ -41,9 +41,11 @@ ALTER TABLE social_links
 CREATE TABLE projects(
     id INT(11) NOT NULL,
     description VARCHAR(300) NOT NULL,
+    name VARCHAR(300) NOT NULL,
+    stacks VARCHAR(1000) NOT NULL,
     user_id INT(11) NOT NULL,
     created_at timestamp NOT NULL DEFAULT current_timestamp,
-    CONSTRAINT fk_userproject FOREIGN KEY (user_id) REFERENCES users(id)
+    CONSTRAINT fk_userproject FOREIGN KEY (user_id) REFERENCES users(id) 
 );
 
 ALTER TABLE projects 
