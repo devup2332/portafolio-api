@@ -5,6 +5,8 @@ interface ProjectI {
   description: string;
   stacks: any[] | string;
   images?: any[];
+  github: string;
+  website: string;
   created_at: Date;
 }
 
@@ -23,6 +25,8 @@ export class Project {
   description: string;
   stacks: any[] | string;
   images?: ProjectImage[];
+  github: string;
+  website: string;
   created_at: Date;
 
   constructor(project: ProjectI, images: ProjectImage[]) {
@@ -32,6 +36,8 @@ export class Project {
     this.description = project.description;
     this.stacks = JSON.parse(project.stacks as string);
     this.created_at = project.created_at;
+    this.website = project.website;
+    this.github = project.github;
     this.images = images.map((item) => {
       delete item.project_id;
       return item;

@@ -18,4 +18,8 @@ export const environments = {
     CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
     CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET,
   },
+  NODEMAILER: {
+    NODEMAILER_EMAIL: process.env.NODEMAILER_EMAIL,
+    NODEMAILER_PASSWORD: process.env.NODEMAILER_PASSWORD,
+  },
 };
