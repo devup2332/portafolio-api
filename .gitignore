@@ -4,3 +4,4 @@ build
 .*.env
 .env
 images
+yarn.lock

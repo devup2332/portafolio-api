@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "nodemon -L src/index.ts",
+    "dev": "nodemon src/index.ts",
     "start": "node dist/index.js",
     "build": "rimraf dist && tsc"
   },
@@ -12,11 +12,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/nodemailer": "^6.4.4",
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.29.0",
     "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.0",
     "express": "^4.17.1",
     "fs-extra": "^10.0.1",
     "handlebars": "^4.7.7",
