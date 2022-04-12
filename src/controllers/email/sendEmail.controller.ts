@@ -9,6 +9,7 @@ import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export const SendEmailController = async (req: Request, res: Response) => {
   try {
+    console.log(req.body);
     const {
       email: remiter,
       message: content,
@@ -22,6 +23,9 @@ export const SendEmailController = async (req: Request, res: Response) => {
       auth: {
         user: environments.NODEMAILER.NODEMAILER_EMAIL,
         pass: environments.NODEMAILER.NODEMAILER_PASSWORD,
+      },
+      tls: {
+        rejectUnauthorized: false,
       },
     };
 

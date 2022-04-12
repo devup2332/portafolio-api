@@ -8,6 +8,7 @@ CREATE TABLE users(
     fullname VARCHAR(300) NOT NULL,
     about_me VARCHAR(1000),
     phone INT(60) NOT NULL,
+    cv VARCHAR(600),
     created_at timestamp NOT NULL DEFAULT current_timestamp,
     role VARCHAR(20) NOT NULL DEFAULT 'user',
     CONSTRAINT chk_role CHECK (role in ('admin','superadmin','user'))

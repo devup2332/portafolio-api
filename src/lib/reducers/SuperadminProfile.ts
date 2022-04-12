@@ -12,6 +12,7 @@ export class SuperadminProfile {
   about_me?: string;
   created_at?: Date;
   username?: string;
+  cv: string
   projects: Project[];
   links?: Links;
 
@@ -25,6 +26,7 @@ export class SuperadminProfile {
     this.fullname = user.fullname;
     this.created_at = user.created_at;
     this.projects = projects;
+    this.cv = user.cv
     this.links = {
       ...links,
     };
