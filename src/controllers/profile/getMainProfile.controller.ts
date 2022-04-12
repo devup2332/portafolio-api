@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import pool from "../../database";
 import { SuperadminProfile } from "../../lib/reducers/SuperadminProfile";
 import { User } from "../../models/users";
+import { projectsUser } from "../projects/getProjects.controller";
 
 export const GetMainProfile = async (req: Request, res: Response) => {
   try {
@@ -13,7 +14,8 @@ export const GetMainProfile = async (req: Request, res: Response) => {
       "SELECT * FROM social_links WHERE user_id=?",
       [superadmin.id]
     )) as any;
-    const user = new SuperadminProfile(superadmin, links[0][0]);
+    const projects = await projectsUser(superadmin.id as string);
+    const user = new SuperadminProfile(superadmin, links[0][0], projects);
     return res.status(200).json({
       message: "Main profile got successfully",
       profile: user,
