@@ -1,23 +1,11 @@
 version: "3.9"
 
 services:
-  api:
-    container_name: api_portafolio
-    build:
-      context: ./
-      dockerfile: dockerfile.dev
-    depends_on:
-        - db
-    volumes:
-        - "./:/usr/src/api"
-    ports:
-      - "${PORT}:${PORT}"
-    networks:
-        - api-net
-    command: npm run dev 
   db:
     image: mysql
     container_name: mysql_portafolio
+    ports: 
+      - "3306:3306"
     networks:
       - api-net
     environment:

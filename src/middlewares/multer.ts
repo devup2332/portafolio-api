@@ -3,11 +3,10 @@ import { v4 as uuid } from "uuid";
 import path from "path";
 
 const storage = multer.diskStorage({
-  destination: path.resolve(__dirname, "../images"),
+  destination: "/tmp",
   filename: (req, file, cb) => {
     const id = uuid();
     const ext = path.extname(file.originalname);
-    console.log("multer", id, ext);
     cb(null, `${id}${ext}`);
   },
 });

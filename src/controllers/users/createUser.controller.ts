@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { create } from "ts-node";
 import pool from "../../database";
 import { hashPassword } from "../../lib/hashPassword";
 import { User } from "../../models/users";
@@ -59,6 +58,7 @@ export const CreaterUserController = async (req: Request, res: Response) => {
         role,
         about_me,
         phone,
+        cv: "",
       };
       const created = (await pool.query("INSERT INTO users set ?", [
         newUser,

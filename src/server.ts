@@ -8,7 +8,7 @@ import passport from "passport";
 import jwtStrategy from "./middlewares/validateToken.middleware";
 import path from "path";
 
-const server = express();
+  const server = express();
 
 server.use(helmet());
 server.use(cors());
