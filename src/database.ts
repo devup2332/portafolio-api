@@ -7,6 +7,7 @@ const pool = mysql.createPool({
   user: environments.DB.DB_USER,
   database: environments.DB.DB_DATABASE,
 });
+console.log(environments.DB);
 
 const promisePool = pool.promise();
 
