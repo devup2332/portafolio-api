@@ -6,8 +6,8 @@ WORKDIR /usr/src/api
 
 COPY package.*json /usr/src/api/
 
-RUN npm install
+RUN yarn install
 
 COPY . /usr/src/api/
 
-RUN npm run build
+RUN yarn build
