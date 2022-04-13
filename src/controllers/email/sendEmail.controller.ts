@@ -9,7 +9,6 @@ import SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export const SendEmailController = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
     const {
       email: remiter,
       message: content,

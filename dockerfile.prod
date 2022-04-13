@@ -11,3 +11,5 @@ RUN yarn install
 COPY . /usr/src/api/
 
 RUN yarn build
+
+COPY ./src/public/email/email.html /usr/src/api/dist/public/email/

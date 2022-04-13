@@ -22,7 +22,6 @@ export const UploadCvController = async (req: Request, res: Response) => {
       }
     );
 
-    console.log(secure_url);
     await pool.query("UPDATE users SET ? WHERE id=?", [
       { cv: secure_url },
       user.id,
