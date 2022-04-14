@@ -8,12 +8,12 @@ services:
       context: ./
       dockerfile: dockerfile.prod
     depends_on:
-        - db
+      - db
     ports:
-      - "${PORT}:${PORT}" 
+      - "${PORT}:${PORT}"
     networks:
-        - api-net
-    command: npm start 
+      - api-net
+    command: npm start
   db:
     image: mysql
     container_name: mysql
@@ -21,13 +21,17 @@ services:
     networks:
       - api-net
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD} 
-      MYSQL_USER: ${DB_USER} 
-      MYSQL_DATABASE: ${DB_DATABASE} 
-      MYSQL_PASSWORD: ${DB_PASSWORD} 
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+
   nginx:
     build: ./nginx
     container_name: nginx
+    environment:
+      - VIRTUAL_HOST=api-drojascam.com,www.api-drojascam.com
+      - LETSENCRYPT_HOST=api-drojascam.com,www.api-drojascam.com
     ports:
       - "80:80"
     depends_on:
@@ -35,8 +39,37 @@ services:
       - api
     restart: always
     networks:
+      - api-netnginx-proxy
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs:ro
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    networks:
       - api-net
-    
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    networks:
+      - gallery_net
+
 networks:
   api-net:
     driver: bridge
