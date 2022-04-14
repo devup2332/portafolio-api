@@ -39,7 +39,7 @@ services:
       - api
     restart: always
     networks:
-      - api-netnginx-proxy
+      - api-net
 
   nginx-proxy:
     image: jwilder/nginx-proxy
@@ -68,12 +68,11 @@ services:
       - vhostd:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
     networks:
-      - gallery_net
+      - api-net 
 
 networks:
   api-net:
     driver: bridge
-
 
 volumes:
   certs:
