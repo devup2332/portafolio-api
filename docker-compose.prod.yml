@@ -73,3 +73,9 @@ services:
 networks:
   api-net:
     driver: bridge
+
+
+volumes:
+  certs:
+  html:
+  vhostd:  
