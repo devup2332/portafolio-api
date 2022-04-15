@@ -46,6 +46,7 @@ CREATE TABLE projects(
     stacks VARCHAR(1000) NOT NULL,
     github VARCHAR(500) NOT NULL,
     website VARCHAR(500) NOT NULL,
+    figma VARCHAR(800) NOT NULL,
     user_id INT(11) NOT NULL,
     created_at timestamp NOT NULL DEFAULT current_timestamp,
     CONSTRAINT fk_userproject FOREIGN KEY (user_id) REFERENCES users(id) 

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import pool from "../../database";
-import { Project, ProjectImage } from "../../lib/reducers/projects";
+import { Project } from "../../lib/reducers/projects";
 
 export const GetProjectsController = async (req: Request, res: Response) => {
   try {
@@ -15,7 +15,7 @@ export const GetProjectsController = async (req: Request, res: Response) => {
     console.log(err);
     return res.status(500).json({
       status: 0,
-      message: "Server Internal Erro",
+      message: "Server Internal Error",
     });
   }
 };

@@ -3,7 +3,8 @@ import pool from "../../database";
 
 export const CreateProject = async (req: Request, res: Response) => {
   try {
-    const { description, name, stack, user_id, github, website } = req.body;
+    const { description, name, stack, user_id, github, website, figma } =
+      req.body;
 
     const string = JSON.stringify(
       stack.map((item: any) => {
@@ -16,8 +17,10 @@ export const CreateProject = async (req: Request, res: Response) => {
       stacks: string,
       user_id,
       github,
-      website,
+      website: website ? website : "",
+      figma: figma ? figma : "",
     };
+    console.log(newProject);
     const response = (await pool.query("INSERT INTO projects SET ?", [
       newProject,
     ])) as any;
