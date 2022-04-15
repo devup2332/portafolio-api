@@ -7,6 +7,7 @@ interface ProjectI {
   images?: any[];
   github: string;
   website: string;
+  figma: string;
   created_at: Date;
 }
 
@@ -27,6 +28,7 @@ export class Project {
   images?: ProjectImage[];
   github: string;
   website: string;
+  figma: string;
   created_at: Date;
 
   constructor(project: ProjectI, images: ProjectImage[]) {
@@ -38,6 +40,7 @@ export class Project {
     this.created_at = project.created_at;
     this.website = project.website;
     this.github = project.github;
+    this.figma = project.figma;
     this.images = images.map((item) => {
       delete item.project_id;
       return item;
